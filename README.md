@@ -1,6 +1,6 @@
 # 🧪 Foundry Local Sandbox
 
-A retro-cool TUI chat app powered by **Microsoft Foundry Local** — talk to AI models running right on your machine. No cloud. No latency excuses. Just vibes. 🚀
+A **Golang terminal UI chat client** for talking to local AI models — powered by the [Microsoft Foundry Local SDK](https://github.com/microsoft/Foundry-Local) ported to Go. No cloud, no API keys, just your machine running models locally. 🚀
 
 ![Running on GPU](assets/running_on_gpu.png)
 
