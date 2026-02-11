@@ -124,7 +124,7 @@ func (s Styles) FooterLine(items ...string) string {
 }
 
 // StatusLine renders the top status row.
-func (s Styles) StatusLine(mode, locality, model string, remote bool) string {
+func (s Styles) StatusLine(mode, locality, device, model string, remote bool) string {
 	badge := s.StatusBadge
 	if remote {
 		badge = s.StatusBadgeWarn
@@ -133,6 +133,8 @@ func (s Styles) StatusLine(mode, locality, model string, remote bool) string {
 		s.StatusMode.Render(mode),
 		" ",
 		badge.Render(locality),
+		" ",
+		s.StatusBar.Render("⚙ "+device),
 		" ",
 		s.StatusBar.Render(model),
 	)

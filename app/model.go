@@ -27,6 +27,7 @@ const (
 type UIState struct {
 	Mode        Mode
 	Locality    string
+	Device      string
 	Remote      bool
 	ShowStats   bool
 	FooterMsg   string
@@ -112,7 +113,11 @@ func NewModel(cfg ModelConfig) *Model {
 	input.CharLimit = 0
 	input.Prompt = "> "
 
-	ui := &UIState{Mode: ModeNormal, Locality: strings.ToUpper(cfg.Locality), Remote: cfg.Remote, ShowStats: true}
+	deviceLabel := strings.ToUpper(cfg.DeviceChoice)
+	if deviceLabel == "" {
+		deviceLabel = "AUTO"
+	}
+	ui := &UIState{Mode: ModeNormal, Locality: strings.ToUpper(cfg.Locality), Device: deviceLabel, Remote: cfg.Remote, ShowStats: true}
 
 	m := &Model{
 		cfg:       cfg,
@@ -258,7 +263,7 @@ func (m *Model) View() string {
 		m.refreshChat()
 	}
 
-	status := m.styles.StatusLine(m.modeLabel(), m.ui.Locality, m.session.ModelAlias, m.ui.Remote)
+	status := m.styles.StatusLine(m.modeLabel(), m.ui.Locality, m.ui.Device, m.session.ModelAlias, m.ui.Remote)
 
 	chatPane := m.styles.ChatPane.Width(max(0, m.viewport.Width))
 	chat := chatPane.Render(m.viewport.View())
@@ -282,7 +287,7 @@ func (m *Model) View() string {
 
 	inputField := promptStyle.Render(m.input.View())
 
-	footerItems := []string{m.modeLabel(), strings.ToUpper(m.ui.Locality)}
+	footerItems := []string{m.modeLabel(), strings.ToUpper(m.ui.Locality), m.ui.Device}
 	footerItems = append(footerItems,
 		fmt.Sprintf("temp=%.2f", m.session.Temperature),
 		fmt.Sprintf("ctx=%d/%d", m.session.CtxUsed, max(1, m.session.CtxLimit)),
