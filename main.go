@@ -12,6 +12,7 @@ import (
 
 func main() {
 	var (
+		modelAlias   = flag.String("model", "phi-4-mini", "Model alias or ID")
 		systemPrompt = flag.String("system", "You are a helpful AI assistant.", "System prompt")
 		device       = flag.String("device", "auto", "Preferred device (auto|cpu|gpu|npu)")
 		temperature  = flag.Float64("temp", 0.2, "Sampling temperature")
@@ -27,7 +28,7 @@ func main() {
 	}
 
 	cfg := app.ModelConfig{
-		Alias:        "phi-4-mini",
+		Alias:        *modelAlias,
 		DeviceChoice: *device,
 		SystemPrompt: *systemPrompt,
 		Temperature:  *temperature,

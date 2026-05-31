@@ -16,6 +16,7 @@ go run .
 
 | Flag | Default | Description |
 |------|---------|-------------|
+| `-model` | `phi-4-mini` | Model alias or ID |
 | `-system` | `"You are a helpful AI assistant."` | System prompt |
 | `-device` | `auto` | Device: `auto` · `cpu` · `gpu` · `npu` |
 | `-temp` | `0.2` | Sampling temperature (0–2) |
